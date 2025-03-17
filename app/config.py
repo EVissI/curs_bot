@@ -18,6 +18,9 @@ class Settings(BaseSettings):
 
     DB_URL:PostgresDsn = ''
 
+    ADMIN_USER:str
+    ADMIN_PASS:str
+
     model_config = SettingsConfigDict(env_file=f"{BASE_DIR}/.env")
 
 

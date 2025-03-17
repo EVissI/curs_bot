@@ -48,7 +48,7 @@ class MyAdminIndexView(AdminIndexView):
     def is_visible(self):
         return False
 
-admin = Admin(app, name='promo', template_mode='bootstrap4',index_view=MyAdminIndexView())
+admin = Admin(app, name='curs', template_mode='bootstrap4',index_view=MyAdminIndexView())
 
 
 admin.add_view(СurrencyView(Сurrency, sync_session,name = 'Валюты'))

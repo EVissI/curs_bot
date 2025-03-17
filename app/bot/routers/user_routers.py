@@ -4,7 +4,6 @@ from aiogram.types import Message, CallbackQuery
 
 from loguru import logger
 from app.bot.common.messages import TEXT
-from app.bot.keyboards.inline import take_currency_info_kb, СurrencyData
 from app.bot.keyboards.markup import MainKeyboard
 from app.db.models import Сurrency
 from app.db.dao import CurencyDAO
@@ -16,18 +15,20 @@ user_router = Router()
 async def cmd_about_us(message: Message):
     await message.answer(TEXT.get('about_us'))
 
-@user_router.message(F.text == MainKeyboard.get_user_kb_texts().get('currency'))
+@user_router.message(F.text == MainKeyboard.get_user_kb_texts().get('USDT'))
 async def cmd_currency(message: Message):
     async with async_session_maker() as session:
-        currencies: Optional[list[Сurrency]] = await CurencyDAO.find_all(session,filters=СurrencyFilter())
-    if not currencies:
+        USDT: Optional[Сurrency] = await CurencyDAO.find_one_or_none(session,filters=СurrencyFilter(currency_name='USDT'))
+    if not USDT:
         await message.answer(TEXT.get('no_currency'))
         return
-    await message.answer(TEXT.get('currency'),reply_markup=take_currency_info_kb(currencies))
+    await message.answer(TEXT.get('currency_info').format(currency_name = USDT.currency_name, currency_value_buy = USDT.buy_value, currency_value_sell = USDT.sell_value))
 
-@user_router.callback_query(СurrencyData().filter())
-async def cmd_currency_info(query: CallbackQuery, callback_data: СurrencyData):
-    await query.message.delete()
+@user_router.message(F.text == MainKeyboard.get_user_kb_texts().get('USD'))
+async def cmd_currency(message: Message):
     async with async_session_maker() as session:
-        currency: Optional[Сurrency] = await CurencyDAO.find_one_or_none(session,filters=СurrencyFilter(currency_name=callback_data.currency_name))
-    await query.message.answer(TEXT.get('currency_info').format(currency_name = currency.currency_name, currency_value = currency.value))
+        USD: Optional[Сurrency] = await CurencyDAO.find_one_or_none(session,filters=СurrencyFilter(currency_name = 'USD'))
+    if not USD:
+        await message.answer(TEXT.get('no_currency'))
+        return
+    await message.answer(TEXT.get('currency_info').format(currency_name = USD.currency_name, currency_value_buy = USD.buy_value, currency_value_sell = USD.sell_value))

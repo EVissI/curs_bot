@@ -7,7 +7,8 @@ del_kbd = ReplyKeyboardRemove()
 
 class MainKeyboard:
     __user_kb_texts_dict = {
-        'currency': 'Курсы валют',
+        'USDT': 'Курс USDT',
+        'USD': 'Курс доллара',
         'about_us': 'О нас',
     }
 
@@ -15,7 +16,8 @@ class MainKeyboard:
     @staticmethod
     def get_user_kb_texts() -> Dict[str, str]:
         """
-        'currency'\n
+        'USDT'\n
+        'USD'\n
         'about_us'
         """
         return MainKeyboard.__user_kb_texts_dict

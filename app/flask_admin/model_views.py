@@ -16,15 +16,14 @@ class СurrencyView(AuthModelView):
     can_create = True
     can_delete = True
     edit_modal = True
-    column_list = ['currency_name', 'currency_name_for_bot','value']
+    column_list = ['currency_name','buy_value','sell_value']
     column_searchable_list = ['currency_name']
-    column_filters = ['value']
-    column_editable_list = ['value','currency_name_for_bot']
+    column_editable_list = ['buy_value','sell_value']
     column_default_sort = 'currency_name'
     form_excluded_columns = ['created_at', 'updated_at']
     column_descriptions = {
         'currency_name': 'Название валюты',
-        'currency_name_for_bot': 'Название валюты для бота',
-        'value': 'Курс валюты'
+        'buy_value': 'Курс покупки',
+        'sell_value': 'Курс продажи'
     }
 

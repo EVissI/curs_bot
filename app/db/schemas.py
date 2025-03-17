@@ -2,10 +2,10 @@
 
 class СurrencyModel(BaseModel):
     currency_name:str
-    currency_name_for_bot:str
-    value:str
+    buy_value:str
+    sell_value:str
 
 class СurrencyFilter(BaseModel):
     currency_name:str = None
-    currency_name_for_bot:str = None
-    value:str = None
+    sell_value:str = None
+    buy_value:str = None
