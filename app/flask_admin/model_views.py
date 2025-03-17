@@ -13,8 +13,8 @@ class AuthModelView(ModelView):
         return redirect(url_for('login'))
     
 class СurrencyView(AuthModelView):
-    can_create = True
-    can_delete = True
+    can_create = False
+    can_delete = False
     edit_modal = True
     column_list = ['currency_name','buy_value','sell_value']
     column_searchable_list = ['currency_name']
