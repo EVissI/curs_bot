@@ -1,0 +1,38 @@
+﻿services:
+  db:
+      image: postgres
+      restart: always
+      environment:
+        POSTGRES_DB: currency
+        POSTGRES_USER: user
+        POSTGRES_PASSWORD: pass
+      volumes:
+        - pgdata:/var/lib/postgresql/data 
+      ports:
+        - "5489:5489"
+  telegram_bot:
+    build: .
+    container_name: currency_bot
+    command: /bin/sh -c "alembic upgrade head && python -m app.bot.main"
+    ports:
+      - "2432:2432"
+    env_file:
+      - .env
+    depends_on:
+      - db
+  flask_admin:
+    build: .
+    container_name: currency_flask_admin
+    command:  python -m app.flask_admin.app 
+    ports:
+      - "2444:2444"
+    env_file:
+      - .env
+    depends_on:
+      - db
+    
+volumes:
+  pgdata:
+networks:
+  app_network:
+    driver: bridge
