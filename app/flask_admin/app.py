@@ -2,6 +2,7 @@
 import flask
 from flask import Flask, request, redirect, url_for, render_template
 from app.config import setup_logger
+from app.config import settings
 logger = setup_logger("admin_panel")
 from flask import Flask
 from flask_admin import Admin,AdminIndexView
@@ -18,8 +19,8 @@ app.config['SECRET_KEY'] = 'AJKClasc6x5z1i2S3Kx3zcdo23'
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
 
 
-USERNAME = "admin"
-LOGIN = "I7oiIE8CCUywrnv"
+USERNAME = settings.ADMIN_USER
+LOGIN = settings.ADMIN_PASS
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
