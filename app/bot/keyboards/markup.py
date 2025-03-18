@@ -28,7 +28,7 @@ class MainKeyboard:
 
         for val in MainKeyboard.get_user_kb_texts().values():
             kb.button(text=val)
-        kb.adjust(len(MainKeyboard.get_user_kb_texts()))
+        kb.adjust(2,1)
 
         return kb.as_markup(resize_keyboard=True)
     
