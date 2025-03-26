@@ -6,16 +6,19 @@ class UserModel(BaseModel):
     username:str
     first_name:str
     last_name:str
-    telegram_id:BigInteger
+    telegram_id:int
     class Config:
+        from_attributes = True
         arbitrary_types_allowed=True
 
 class UserFilter(BaseModel):
     username:str = None
     first_name:str = None
     last_name:str = None
-    telegram_id:BigInteger = None
+    telegram_id:int = None
+    
     class Config:
+        from_attributes = True
         arbitrary_types_allowed=True
 
 class СurrencyModel(BaseModel):
