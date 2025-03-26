@@ -32,7 +32,7 @@ async def cmd_command_start(message: Message):
                 last_name=message.from_user.last_name,
                 username=message.from_user.username
             )
-            UserDAO.add(session, new_user)
+            await UserDAO.add(session, new_user)
             await message.answer(
                     TEXT.get('start'),
                     reply_markup=MainKeyboard.build_main_kb()
