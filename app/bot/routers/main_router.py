@@ -38,4 +38,4 @@ async def cmd_command_start(message: Message):
                     reply_markup=MainKeyboard.build_main_kb()
                 )
     except Exception as e:
-        pass
+        logger.error(f'ошибка при добавлении юзера:{str(e)}')
