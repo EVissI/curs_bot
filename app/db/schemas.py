@@ -1,20 +1,21 @@
-﻿from pydantic import BaseModel
+﻿from typing import Optional
+from pydantic import BaseModel
 from sqlalchemy import BigInteger
 
 
 class UserModel(BaseModel):
-    username:str
+    username:Optional[str]
     first_name:str
-    last_name:str
+    last_name:Optional[str]
     telegram_id:int
     class Config:
         from_attributes = True
         arbitrary_types_allowed=True
 
 class UserFilter(BaseModel):
-    username:str = None
+    username:Optional[str] = None
     first_name:str = None
-    last_name:str = None
+    last_name:Optional[str] = None
     telegram_id:int = None
     
     class Config:
