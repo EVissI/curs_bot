@@ -1,4 +1,4 @@
-﻿from sqlalchemy import Integer,BIGINT
+﻿from sqlalchemy import Integer,BigInteger
 from sqlalchemy.orm import Mapped, mapped_column
 from app.db.database import Base
 
@@ -7,7 +7,7 @@ class User(Base):
     __tablename__ = 'users'
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     
-    telegram_id: Mapped[int] = mapped_column(BIGINT,nullable=False, unique=True)
+    telegram_id: Mapped[int] = mapped_column(BigInteger,nullable=False, unique=True)
     first_name: Mapped[str] = mapped_column(nullable=False)
     username: Mapped[str] = mapped_column(nullable=True)
     last_name: Mapped[str] = mapped_column(nullable=True)
